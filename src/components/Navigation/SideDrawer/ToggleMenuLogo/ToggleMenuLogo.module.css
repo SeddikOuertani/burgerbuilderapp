@@ -1,0 +1,22 @@
+.Logo{
+    background-color: #a1520d;
+    height : 100%;
+    box-sizing: border-box;
+}
+
+.Logo img{
+    height : 100%;
+}
+
+
+.Logo :hover{
+    background-color: #ce7324;
+    height : 100%;
+    box-sizing: border-box;
+}
+
+.Logo :active{
+    background-color: #381d05;
+    height : 100%;
+    box-sizing: border-box;
+}

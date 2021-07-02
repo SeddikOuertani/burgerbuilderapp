@@ -1,9 +1,13 @@
-import logo from './logo.svg';
+import Layout from './components/Layout/layout';
+import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
+    <div >
+      <Layout>
+        <BurgerBuilder />
+      </Layout>
     </div>
   );
 }

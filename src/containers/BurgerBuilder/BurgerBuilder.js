@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Aux from '../../hoc/Auxiliary';
+import Aux from '../../hoc/Auxiliary/Auxiliary';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
@@ -72,7 +72,6 @@ class BurgerBuilder extends Component {
         for (let i =0 ; i < arrVal.length; i++){
             s = s+arrVal[i];
         }
-        console.log('Sum =' + s+', sum type : '+typeof(s))
         this.setState({purchaseDisabled : s === 0})
     }
 
@@ -101,7 +100,8 @@ class BurgerBuilder extends Component {
         return ( 
             <Aux>
                 <Modal modalClosed={this.purchaseCancelHandler} show={this.state.purchacing}>
-                    <OrderSummary 
+                    <OrderSummary
+                        price={this.state.totalPrice}
                         ingredients={this.state.ingredients}
                         purchaseCancelled={this.purchaseCancelHandler}
                         purchaseContinued={this.purchaceContinueHandler}/>

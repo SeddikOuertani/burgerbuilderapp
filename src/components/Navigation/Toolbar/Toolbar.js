@@ -3,7 +3,7 @@ import classes from './Toolbar.module.css'
 import Logo from '../../Logo/Logo';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import ToggleMenuLogo from '../SideDrawer/ToggleMenuLogo/ToggleMenuLogo';
-import Aux from '../../../hoc/Auxiliary';
+import Aux from '../../../hoc/Auxiliary/Auxiliary';
 
 const toolbar = (props) => (
     <Aux>    

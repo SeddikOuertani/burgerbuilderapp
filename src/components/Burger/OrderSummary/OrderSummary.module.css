@@ -1,0 +1,16 @@
+.PriceStyle{
+    font-weight: bold;
+    background-color: #fdd487;
+    border-radius: 5px;
+    box-shadow: 2px;
+    border : 2px solid transparent;
+    padding : 5px;
+    margin : 0 10px;
+    width: fit-content;
+    color : black;
+}
+
+.PriceContentStyle{
+    color : green;
+    margin : 0 5px;
+}

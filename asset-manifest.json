@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/burgerbuilderapp/static/css/main.2978d5a4.chunk.css",
-    "main.js": "/burgerbuilderapp/static/js/main.46742961.chunk.js",
-    "main.js.map": "/burgerbuilderapp/static/js/main.46742961.chunk.js.map",
-    "runtime-main.js": "/burgerbuilderapp/static/js/runtime-main.27c089be.js",
-    "runtime-main.js.map": "/burgerbuilderapp/static/js/runtime-main.27c089be.js.map",
-    "static/js/2.45efbae6.chunk.js": "/burgerbuilderapp/static/js/2.45efbae6.chunk.js",
-    "static/js/2.45efbae6.chunk.js.map": "/burgerbuilderapp/static/js/2.45efbae6.chunk.js.map",
-    "static/js/3.098fde3b.chunk.js": "/burgerbuilderapp/static/js/3.098fde3b.chunk.js",
-    "static/js/3.098fde3b.chunk.js.map": "/burgerbuilderapp/static/js/3.098fde3b.chunk.js.map",
+    "main.css": "/burgerbuilderapp/static/css/main.2a9b11ad.chunk.css",
+    "main.js": "/burgerbuilderapp/static/js/main.9d4a9c9a.chunk.js",
+    "main.js.map": "/burgerbuilderapp/static/js/main.9d4a9c9a.chunk.js.map",
+    "runtime-main.js": "/burgerbuilderapp/static/js/runtime-main.a78cd7b5.js",
+    "runtime-main.js.map": "/burgerbuilderapp/static/js/runtime-main.a78cd7b5.js.map",
+    "static/js/2.c50ea414.chunk.js": "/burgerbuilderapp/static/js/2.c50ea414.chunk.js",
+    "static/js/2.c50ea414.chunk.js.map": "/burgerbuilderapp/static/js/2.c50ea414.chunk.js.map",
+    "static/js/3.692e838c.chunk.js": "/burgerbuilderapp/static/js/3.692e838c.chunk.js",
+    "static/js/3.692e838c.chunk.js.map": "/burgerbuilderapp/static/js/3.692e838c.chunk.js.map",
     "index.html": "/burgerbuilderapp/index.html",
-    "static/css/main.2978d5a4.chunk.css.map": "/burgerbuilderapp/static/css/main.2978d5a4.chunk.css.map",
-    "static/js/2.45efbae6.chunk.js.LICENSE.txt": "/burgerbuilderapp/static/js/2.45efbae6.chunk.js.LICENSE.txt",
+    "static/css/main.2a9b11ad.chunk.css.map": "/burgerbuilderapp/static/css/main.2a9b11ad.chunk.css.map",
+    "static/js/2.c50ea414.chunk.js.LICENSE.txt": "/burgerbuilderapp/static/js/2.c50ea414.chunk.js.LICENSE.txt",
     "static/media/logoBurger.ec69c7f6.png": "/burgerbuilderapp/static/media/logoBurger.ec69c7f6.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.27c089be.js",
-    "static/js/2.45efbae6.chunk.js",
-    "static/css/main.2978d5a4.chunk.css",
-    "static/js/main.46742961.chunk.js"
+    "static/js/runtime-main.a78cd7b5.js",
+    "static/js/2.c50ea414.chunk.js",
+    "static/css/main.2a9b11ad.chunk.css",
+    "static/js/main.9d4a9c9a.chunk.js"
   ]
 }

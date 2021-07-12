@@ -13,10 +13,10 @@ class App extends Component{
             <div> 
                 <Layout>
                     <Switch>
-                        <Redirect from="/burgeruilder" to="/"/>
+                        <Redirect from="/burgerbuilderapp/" to="/"/>
                         <Route path='/checkout' component={Checkout}/>
+                        <Route path='/Orders' component={Orders}/>                        
                         <Route path='/' exact component={BurgerBuilder}/>
-                        <Route path='/Orders' component={Orders}/>
                     </Switch>
                 </Layout>
             </div>

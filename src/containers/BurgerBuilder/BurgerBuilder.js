@@ -7,7 +7,6 @@ import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import axios from '../../axiosOrders';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
-
 const INGREDIENT_PRICES = {
     salad : 0.3,
     meat : 1.0,
@@ -25,7 +24,7 @@ class BurgerBuilder extends Component {
             purchaseDisabled : true,
             purchacing : false,
             loading : false,
-            error : false
+            error : false,
         }
     }
 
@@ -96,36 +95,19 @@ class BurgerBuilder extends Component {
     }
 
     purchaceContinueHandler = () =>{
-        this.setState({loading : true})
-        // alert('You continued!');
-        const order = {
-            ingredients : this.state.ingredients,
-            price : this.state.totalPrice, //WARNING
-            /*the setting of price is unsafe and to make sure users aren't
-            manipulating the pricing, there should be a second price calculation
-            in the server side.*/
-            customer : {
-                Name : 'Seddik',
-                address : {
-                    street : 'Test Street',
-                    zipCode : "1111",
-                    country : "Tunisia"
-                },
-                email : 'myEmail@gmail.com'
-            }, 
-            deliveryMethod : 'fastest',
-            thiccLevelOfurger : 'thiiccc'
-        }
         
-        //orders is being created when I make the post request
-        axios.post('/orders.json', order)
-            .then(response =>{
-                console.log(response);
-                this.setState({loading : false, purchacing : false})
-            }).catch(error => {
-                this.setState({loading : false, purchacing : false})
-                console.log(error);
-            })
+        const queryParams = []
+        for( let i in this.state.ingredients ){
+            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
+        }
+        queryParams.push("price="+this.state.totalPrice)
+        const queryString = queryParams.join('&');
+        
+
+        this.props.history.push({
+            pathname : '/checkout',
+            search : '?'+ queryString,
+        })
     }
 
  
@@ -174,8 +156,9 @@ class BurgerBuilder extends Component {
                 />
             )
         }
+
     
-        return ( 
+        return (
             <Aux>
                 <Modal modalClosed={this.purchaseCancelHandler} show={this.state.purchacing}>
                     {orderSummary}                    

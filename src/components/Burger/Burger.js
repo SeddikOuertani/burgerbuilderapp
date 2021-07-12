@@ -1,9 +1,11 @@
 import React from 'react';
 import classes from './Burger.module.css';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
+// import {withRouter } from 'react-router-dom';
+//can be used to pass closest routing props
+//we need to wrap out export with it
 
 const burger = (props) => {
-    
     let ingrendientsArr = Object.keys(props.ingredients)
         .map(igKey=> {
             return [...Array(props.ingredients[igKey])].map((_,i)=> {
@@ -13,7 +15,6 @@ const burger = (props) => {
         .reduce((arr, el) => {
             return arr.concat(el)
         } , [])
-    console.log(ingrendientsArr)
 
     if (ingrendientsArr.length === 0){
         ingrendientsArr = <p>please start adding ingredients !</p>

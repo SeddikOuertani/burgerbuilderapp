@@ -3,42 +3,112 @@ import Button from '../../components/UI/Button/Button';
 import classes from './ContactData.module.css';
 import axios from '../../axiosOrders';
 import Spinner from '../../components/UI/Spinner/Spinner';
-
+import Input from '../../components/UI/Input/Input'
 class ContactData extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { 
-            name : '',
-            email : '',
-            address : {
-                street :'',
-                postalCode : 0,
-            },
+    state = { 
+        orderForm : {
             
-            loading : false,
-         }
-    }
+            name : {
+                elementType : 'input',
+                elementConfig : {
+                    type : 'text',
+                    placeholder : 'Your name'
+                },
+                value : '',
+                validation : {
+                    required : true ,
+                },
+                valid : false,
+                touched : false,
+            },
+            street : {
+                elementType : 'input',
+                elementConfig : {
+                    type : 'text',
+                    placeholder : 'Street'
+                },
+                value : '',
+                validation : {
+                    required : true ,
+                },
+                valid : false,
+                touched : false,
+            },
+            zipCode : {
+                elementType : 'input',
+                elementConfig : {
+                    type : 'text',
+                    placeholder : 'ZIP CODE'
+                },
+                value : '',
+                validation : {
+                    minLength : 5,
+                    maxLength : 5,
+                    required : true ,
+                },
+                valid : false,
+                touched : false,
+            },
+            country : {
+                elementType : 'input',
+                elementConfig : {
+                    type : 'text',
+                    placeholder : 'Country'
+                },
+                value : '',
+                validation : {
+                    required : true ,
+                },
+                valid : false,
+                touched : false,
+            },
+            email : {
+                elementType : 'input',
+                elementConfig : {
+                    type : 'email',
+                    placeholder : 'Your E-mail'
+                },
+                value : '',
+                validation : {
+                    required : true ,
+                },
+                valid : false,
+                touched : false,
+            },
+            deliveryMethod : {
+                elementType : 'select',
+                elementConfig : {
+                    options : [
+                        {value : 'fastest', displayValue : 'Fastest'},
+                        {value : 'cheapest', displayValue : 'Cheapest'}
+                    ]
+                },
+                value : 'fastest',
+                validation : {},
+                valid : true,
+            },
+        },
+
+        loading : false,
+        formValid : false,
+     }
 
     orderHandler = (event) =>{
-        event.preventDefault()
+        event.preventDefault();
         this.setState({loading : true})
+
+        const formData = {};
+        for (let formElementIdentifier in this.state.orderForm){
+            formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
+        }
+
         const order = {
             ingredients : this.props.ingredients,
             price : this.props.price, //WARNING
             /*the setting of price is unsafe and to make sure users aren't
             manipulating the pricing, there should be a second price calculation
             in the server side.*/
-            customer : {
-                Name : 'Seddik',
-                address : {
-                    street : 'Test Street',
-                    zipCode : "1111",
-                    country : "Tunisia"
-                },
-                email : 'myEmail@gmail.com'
-            }, 
-            deliveryMethod : 'fastest',
-            thiccLevelOfurger : 'thiiccc'
+            orderData : formData, 
         }
         
         //orders is being created when I make the post request
@@ -53,15 +123,69 @@ class ContactData extends Component {
             })
     }
 
+    checkValidity = (value, rules) => {
+        let isValid = true;
+
+        if(rules.required){
+            isValid = value.trim() !== '' && isValid;
+        }
+
+        if(rules.minLength){
+            isValid = value.length >= rules.minLength && isValid;
+        }
+
+        if(rules.maxLength){
+            isValid = value.length <= rules.maxLength && isValid;
+        }
+
+        return isValid;
+    }
+
+    inputChangedHandler = (event, inputIdentifier) => {
+        const updatedOrderForm = {...this.state.orderForm};
+        const updatedFormElment = {...updatedOrderForm[inputIdentifier]};
+        updatedFormElment.value = event.target.value;
+        updatedFormElment.touched = true;
+        updatedFormElment.valid = this.checkValidity(updatedFormElment.value, updatedFormElment.validation)
+        updatedOrderForm[inputIdentifier] = updatedFormElment;
+        
+        let formValid = true;
+        for(let inputIdentifier in updatedOrderForm){
+            formValid = updatedOrderForm[inputIdentifier].valid && formValid;
+        }
+
+        console.log(updatedFormElment)
+        this.setState({
+            orderForm : updatedOrderForm,
+            formValid : formValid
+        })
+    }
+
+    
+
     render() { 
 
+        let formElementsArray = [];
+        for (let key in this.state.orderForm){
+            formElementsArray.push({
+                id : key,
+                config : this.state.orderForm[key],
+            })
+        }
         let form = (
-            <form>
-                <input className={classes.Input} type="text" name="postalCode" placeholder="Postal Code"/>
-                <input className={classes.Input} type="text" name="email" placeholder="Your email"/>
-                <input className={classes.Input} type="text" name="street" placeholder="Street"/>
-                <input className={classes.Input} type="text" name="name" placeholder="Your name"/>
-                <Button clicked={this.orderHandler} btnType="Success">ORDER</Button>
+            <form onSubmit={this.orderHandler}>
+                {formElementsArray.map(formElement=>(
+                    <Input
+                        key = {formElement.id} 
+                        elementType={formElement.config.elementType}
+                        elementConfig={formElement.config.elementConfig} 
+                        value={formElement.config.value}
+                        invalid={!formElement.config.valid}
+                        shouldValidate={formElement.config.validation}
+                        touched={formElement.config.touched}
+                        changed={(event) => this.inputChangedHandler(event, formElement.id)} />
+                ))}
+                <Button disabled={!this.state.formValid} clicked={this.orderHandler} btnType="Success">ORDER</Button>
             </form> 
         );
         if(this.state.loading){

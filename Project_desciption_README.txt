@@ -1,8 +1,7 @@
 ********Burger Builder app*********
 *************************************
 
-A dynamic React JS application allowing a user to build his own burger using the given ingredients,
-used to practice React JS.
+A dynamic React JS application allowing a user to build his own burger using the given ingredients.
 
 + LifeCycle hooks (useEffect, setState),
 + working with stateless and statefull components
@@ -14,5 +13,11 @@ used to practice React JS.
 + Custom components
 + Dynamic CSS modules
 + axios HTTP requests and response handling
-+ working with firebase json files
-+ error handling and interceptors
++ working with FIREBASE
++ Routing with react-router-dom
++ Dynamic Routes
++ Error handling and interceptors
++ Dynamic Form elements
++ Dynamic styling for form validation
++ Custom form validation
++ Input Config js

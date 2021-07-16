@@ -25,7 +25,7 @@ class OrderSummary extends Component{
                 <p className={classes.PriceStyle}>
                         Total price :
                     <span className={classes.PriceContentStyle}>
-                        {this.props.price.toFixed(2)}
+                        {this.props.price}
                     </span>
                     $
                 </p>

@@ -3,6 +3,9 @@
 
 A dynamic React JS application allowing a user to build his own burger using the given ingredients.
 
++ Redux
++ Redux advanced features
++ Refractured Reducers
 + LifeCycle hooks (useEffect, setState),
 + working with stateless and statefull components
 + PropTypes

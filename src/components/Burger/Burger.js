@@ -8,8 +8,9 @@ import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 const burger = (props) => {
     let ingrendientsArr = Object.keys(props.ingredients)
         .map( igKey => {
-            return [...Array( props.ingredients[igKey] )]
-                .map( ( i, _ ) => {
+            return [...Array( props.ingredients[igKey])]
+                .map( ( _, i ) => {
+                    console.log(i)
                     return <BurgerIngredient key={igKey + Math.random()*90} type={igKey} />;
             } );
         } )

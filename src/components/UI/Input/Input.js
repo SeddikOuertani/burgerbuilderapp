@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './Input.module.css'
 const Import = (props) => {
 
-    const inputClasses = [classes.InputElement]
+    let inputClasses = [classes.InputElement]
     if(props.invalid && props.shouldValidate && props.touched){
         inputClasses.push(classes.Invalid)
     }
@@ -40,10 +40,11 @@ const Import = (props) => {
             )
             break;
         default:
-            inputElement = <input 
+            inputElement = <input
+                type={props.elementConfig.type}
                 className={classes.InputElement} 
                 {...props.elementConfig} 
-                value={props.value}/>;
+                value=''/>;
     }
 
     return ( 

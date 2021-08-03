@@ -26,18 +26,23 @@ class BurgerBuilder extends Component {
     }
 
     updatePurchaseState = () => {
-       return lodash.sum((Object.values(this.props.ingredients))) === 0
+       return lodash.sum((Object.values(this.props.ingredients))) === 0;
     }
 
-    purchaseHandler = () =>{
-        this.setState({purchacing : true}); 
+    purchaseHandler = () => {
+        if(this.props.isAuthenticated){
+            this.setState({purchacing : true}); 
+        }else {
+            this.props.onSetAuthRedirectPath('/checkout')
+            this.props.history.push('/auth')
+        }
     }
 
-    purchaseCancelHandler = () =>{
+    purchaseCancelHandler = () => {
         this.setState({purchacing : false})
     }
 
-    purchaceContinueHandler = () =>{
+    purchaceContinueHandler = () => {
         // this is code for how you pass query params from page to page
         // const queryParams = []
         // for( let i in this.state.ingredients ){
@@ -66,6 +71,12 @@ class BurgerBuilder extends Component {
 
         let burger = this.props.error ? <p>Ingredients can't be loaded</p> : <Spinner/>;
 
+        let orderBtnText = "Sign In to order";
+        if( this.props.isAuthenticated) {
+            orderBtnText = "Order Now"
+        }
+        
+
         if(this.props.ingredients){
             burger = (
                 <Aux>
@@ -75,9 +86,11 @@ class BurgerBuilder extends Component {
                         ordered={this.purchaseHandler}
                         purchaseDisabled={this.updatePurchaseState()}
                         price = {this.props.totalPrice}
-                        ingredientRemoved={this.props.onRemoveIngredients} 
+                        ingredientRemoved={this.props.onRemoveIngredients}
                         ingredientAdded={this.props.onAddIngredients}
                         disabled={disabledInfo}
+                        orderBtnText={orderBtnText}
+                        isAuthenticated={this.props.isAuthenticated}
                     />
                     
                 </Aux>
@@ -109,7 +122,8 @@ const mapStateToProps = state => {
     return {
         ingredients : state.burgerBuilder.ingredients,
         totalPrice : state.burgerBuilder.totalPrice,
-        error : state.burgerBuilder.error
+        error : state.burgerBuilder.error,
+        isAuthenticated : state.auth.token !== null,
     }
 }
 
@@ -118,7 +132,8 @@ const mapDispatchToProps = dispatch => {
         onAddIngredients : (ingName) => dispatch(actions.addIngredient(ingName)),
         onRemoveIngredients : (ingName) => dispatch(actions.removeIngredient(ingName)),
         onInitIngredients : () => dispatch(actions.initIngredient()),
-        onInitPurchase : () => dispatch(actions.purchaseInit())
+        onInitPurchase : () => dispatch(actions.purchaseInit()),
+        onSetAuthRedirectPath : (path) => dispatch(actions.setAuthRedirectPath(path))
     }
 }
  

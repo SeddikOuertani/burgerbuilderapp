@@ -113,7 +113,7 @@ class ContactData extends Component {
         }
 
         //order is being created here
-        this.props.onOrderBurger(order)
+        this.props.onOrderBurger(order, this.props.token)
     }
 
     checkValidity(value, rules) {
@@ -159,8 +159,6 @@ class ContactData extends Component {
         for(let inputIdentifier in updatedOrderForm){
             formValid = updatedOrderForm[inputIdentifier].valid && formValid;
         }
-
-        console.log(updatedFormElment)
         this.setState({
             orderForm : updatedOrderForm,
             formValid : formValid
@@ -212,12 +210,13 @@ const mapStateToProps = (state) =>{
         ingredients : state.burgerBuilder.ingredients,
         price : state.burgerBuilder.totalPrice,
         loading : state.order.loading,
+        token : state.auth.token
     }
 }
 
 const mapDispatchToProps  = dispatch => {
     return {
-        onOrderBurger : (orderData) => dispatch(actions.purchaseBurger(orderData))
+        onOrderBurger : (orderData, token) => dispatch(actions.purchaseBurger(orderData, token))
     }
 }
 
